@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #E5E5E0;
+}
+
+.links-box{
+  background: URL('/bg.svg');
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
