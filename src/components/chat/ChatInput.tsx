@@ -8,12 +8,23 @@ import {
 import { useState } from "react";
 
 export default function ChatInput() {
+  const [input, setInput] = useState("");
   const [isLinksOpen, setIsLinksOpen] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setInput("");
+  };
   return (
     <footer className="px-4 sticky bottom-5 w-full">
-      <form className="max-w-6xl mx-auto py-2 px-4 bg-white rounded-lg flex items-center justify-between">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-6xl mx-auto py-2 px-4 bg-white rounded-lg flex items-center justify-between"
+      >
         <input
           type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Reply to @Rohit"
           className="py-2 md:px-4 w-full focus-within:outline-none"
         />
@@ -40,7 +51,7 @@ export default function ChatInput() {
               <Paperclip className="size-6" />
             </button>
           </div>
-          <button className="">
+          <button className="" type="submit">
             <SendHorizontal className="size-6" />
           </button>
         </div>

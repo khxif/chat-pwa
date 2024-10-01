@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import { Chat } from "../../types/types";
 
 interface ChatMessageProps {
@@ -6,14 +7,31 @@ interface ChatMessageProps {
 
 export default function ChatMessage({ chat }: ChatMessageProps) {
   return (
-    <div className="flex items-start space-x-2 max-w-xs md:max-w-xl">
+    <div
+      className={
+        chat.sender.self
+          ? "flex items-end space-x-2 max-w-xs md:max-w-xl ml-auto"
+          : "flex items-start space-x-2 max-w-xs md:max-w-xl"
+      }
+    >
       <img
         src={chat?.sender.image}
         alt="pfp"
-        className="size-8 md:size-10 object-cover rounded-full"
+        className={
+          chat.sender.self
+            ? "hidden"
+            : "size-8 md:size-10 object-cover rounded-full"
+        }
         loading="lazy"
       />
-      <div className="bg-white shadow-md p-4 rounded-tr-lg rounded-b-lg">
+      <div
+        className={twMerge(
+          " shadow-md p-4 ",
+          chat.sender.self
+            ? "rounded-bl-lg bg-[#1C63D5] rounded-t-lg text-white"
+            : "bg-white rounded-tr-lg rounded-b-lg"
+        )}
+      >
         <p>{chat?.message}</p>
       </div>
     </div>
