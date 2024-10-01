@@ -8,7 +8,14 @@ export default function ChatBody() {
   const [page, setPage] = useState(0);
   const { chats } = useMessages(page);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
-  const MAX_DATA = 1000;
+  const MAX_DATA = 300;
+
+  const handleScroll = () => {
+    if (document.documentElement.scrollTop === 0) {
+      setPage((prev) => prev + 1);
+      document.documentElement.scrollTop = 1;
+    }
+  };
 
   const scrollToBottom = () => {
     if (chatEndRef.current) chatEndRef.current.scrollIntoView();
@@ -19,12 +26,9 @@ export default function ChatBody() {
   }, [chats]);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (document.documentElement.scrollTop === 0) {
-        setPage((prev) => prev + 1);
-        document.documentElement.scrollTop = 1;
-      }
-    });
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -32,7 +36,7 @@ export default function ChatBody() {
       <InfiniteScroll
         dataLength={chats.length}
         inverse={true}
-        className="flex flex-col-reverse space-y-5"
+        className="flex flex-col-reverse gap-y-5"
         next={() => setPage((prev) => prev + 1)}
         hasMore={chats?.length < MAX_DATA ? true : false}
         loader={<h4>Loading...</h4>}

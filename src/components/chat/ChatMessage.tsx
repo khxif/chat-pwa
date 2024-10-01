@@ -8,11 +8,10 @@ interface ChatMessageProps {
 export default function ChatMessage({ chat }: ChatMessageProps) {
   return (
     <div
-      className={
-        chat.sender.self
-          ? "flex items-end space-x-2 max-w-xs md:max-w-xl ml-auto"
-          : "flex items-start space-x-2 max-w-xs md:max-w-xl"
-      }
+      className={twMerge(
+        "flex max-w-xs md:max-w-xl",
+        chat.sender.self ? "items-end ml-auto" : "items-start space-x-2"
+      )}
     >
       <img
         src={chat?.sender.image}
@@ -26,7 +25,7 @@ export default function ChatMessage({ chat }: ChatMessageProps) {
       />
       <div
         className={twMerge(
-          " shadow-md p-4 ",
+          "shadow-md p-4 ",
           chat.sender.self
             ? "rounded-bl-lg bg-[#1C63D5] rounded-t-lg text-white"
             : "bg-white rounded-tr-lg rounded-b-lg"

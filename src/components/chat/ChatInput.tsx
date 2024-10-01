@@ -5,9 +5,11 @@ import {
   SendHorizontal,
   Video,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useClickAway } from "react-use";
 
 export default function ChatInput() {
+  const ref = useRef<HTMLDivElement | null>(null);
   const [input, setInput] = useState("");
   const [isLinksOpen, setIsLinksOpen] = useState(false);
 
@@ -15,8 +17,12 @@ export default function ChatInput() {
     e.preventDefault();
     setInput("");
   };
+
+  useClickAway(ref, () => {
+    setIsLinksOpen(false);
+  });
   return (
-    <footer className="px-4 sticky bottom-5 w-full">
+    <footer ref={ref} className="px-4 sticky bottom-5 w-full">
       <form
         onSubmit={handleSubmit}
         className="max-w-6xl mx-auto py-2 px-4 bg-white rounded-lg flex items-center justify-between"
