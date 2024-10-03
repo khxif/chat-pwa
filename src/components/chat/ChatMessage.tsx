@@ -9,7 +9,7 @@ export default function ChatMessage({ chat }: ChatMessageProps) {
   return (
     <div
       className={twMerge(
-        "flex max-w-xs md:max-w-xl",
+        "flex max-w-xs ",
         chat.sender.self ? "items-end ml-auto" : "items-start space-x-2"
       )}
     >

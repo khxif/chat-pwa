@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header
       className="max-w-6xl mx-auto py-5 flex flex-col space-y-4 border-b bg-[#E5E5E0]
-    sticky top-0 left-0 w-full border-b-primary-gray/50 z-50 px-4 md:px-0"
+    sticky top-0 left-0 w-full border-b-primary-gray/50 z-50 px-4 md:px-0 "
     >
       <div className="flex items-center justify-between">
         <span className="flex items-center space-x-4">

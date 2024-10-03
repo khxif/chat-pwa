@@ -22,10 +22,10 @@ export default function ChatInput() {
     setIsLinksOpen(false);
   });
   return (
-    <footer ref={ref} className="px-4 sticky bottom-5 w-full">
+    <footer ref={ref} className="sticky bottom-20 w-full">
       <form
         onSubmit={handleSubmit}
-        className="max-w-6xl mx-auto py-2 px-4 bg-white rounded-lg flex items-center justify-between"
+        className="mx-auto py-2 px-4 bg-white rounded-lg flex items-center justify-between"
       >
         <input
           type="text"

@@ -7,6 +7,7 @@ import ChatMessage from "./ChatMessage";
 export default function ChatBody() {
   const [page, setPage] = useState(0);
   const { chats } = useMessages(page);
+  const chatContainerRef = useRef<HTMLDivElement | null>(null);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
   const MAX_DATA = 300;
 
@@ -26,13 +27,24 @@ export default function ChatBody() {
   }, [chats]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    const chatContainer = chatContainerRef.current;
+    if (chatContainer) {
+      chatContainer.addEventListener("scroll", handleScroll);
+    }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      if (chatContainer) {
+        chatContainer.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, []);
 
   return (
-    <main className="max-w-6xl mx-auto py-8 flex flex-col space-y-5 pb-20 px-4 md:px-0">
+    <main
+      ref={chatContainerRef}
+      className="max-w-6xl mx-auto py-8 flex flex-col space-y-5 pb-32  overflow-y-scroll scrollbar-hide
+     md:px-0 h-[28rem]"
+    >
       <InfiniteScroll
         dataLength={chats.length}
         inverse={true}
